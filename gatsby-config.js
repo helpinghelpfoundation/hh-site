@@ -119,7 +119,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-mailchimp',
       options: {
-        endpoint: '', // add your MC list endpoint here
+        endpoint: 'https://foundation.us18.list-manage.com/subscribe/post?u=6f516f855b4a3ec977fb99869&amp;id=1467223c7c', // add your MC list endpoint here
       },
     },
     {

@@ -2,7 +2,7 @@
   "name": "@blog/agency",
   "private": true,
   "version": "2.0.0",
-  "author": "RedQ, Inc",
+  "author": "Helping Help Foundation Inc",
   "dependencies": {
     "@styled-system/theme-get": "^5.1.2",
     "axios": "^0.19.2",
@@ -70,6 +70,7 @@
     "@types/styled-system": "^5.1.9",
     "@types/styled-system__theme-get": "^5.0.0",
     "@types/yup": "^0.26.34",
+    "gh-pages": "^2.2.0",
     "prettier": "^2.0.2"
   },
   "scripts": {
@@ -78,7 +79,6 @@
     "develop": "gatsby develop",
     "clean": "gatsby clean",
     "serve": "gatsby serve",
-    "build:analyze": "ANALYZE=true yarn build",
     "deploy": "gatsby build && gh-pages -d public -b gh-pages"
   }
 }
