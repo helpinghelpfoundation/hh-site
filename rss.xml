@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Official Website]]></title><description><![CDATA[Official Helping Help Foundation Webs-te]]></description><link>https://helpinghelp.foundation</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 12 May 2020 13:36:34 GMT</lastBuildDate><item><title><![CDATA[Sponsored Project-CORDBoard]]></title><description><![CDATA[A Dashboard for COVID-19 Open Research Dataset (CORD-19). Enabling researchers to search, view Coronavirus based research papers in a simlpe…]]></description><link>https://helpinghelp.foundation/project-cordboard/</link><guid isPermaLink="false">https://helpinghelp.foundation/project-cordboard/</guid><pubDate>Mon, 11 May 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;A Dashboard for COVID-19 Open Research Dataset (CORD-19). Enabling researchers to search, view Coronavirus based research papers in a simlpe way.&lt;/p&gt;
+&lt;h1&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;As we all now Coronavirus has become a major health concern for people across the globe. Almost every country is affected by it. While Governments with help from medical professionals are working 24 x 7 to take care of people and to find a cure for this virus. Lots of research is also being done around the world. This research, however big or small, can help researchers, companies, medical professionals to reduce the effects of the virus with persons affected, help in educating Governments and public on how to help reduce the spread of the virus, finding a cure or a vaccine and many such uses.&lt;/p&gt;
+&lt;p&gt;Several for-profit and non-profit organizations are coming forward to help mitigate the pandemic in whatever ways they can. One such effort is from the Semantic Scholar team at the Allen Institute for AI, partnering with some research groups to provide CORD-19 (COVID-19 Open Research Dataset) which is a free resource of more than 57,000 scholarly articles about the novel coronavirus for use by the global research community.&lt;/p&gt;
+&lt;h1&gt;Motivation&lt;/h1&gt;
+&lt;p&gt;This project, CORDBoard, was started with such motivation to help the global research community. Allen Institute makes these datasets available, but the raw formats (json documents) are not usable without a proper User Interface. Also these json documents are plain text files and do not need to conform to a specific structure. These are easy to gather and store data, while special interfaces need to be developed programmatically to make these readable, searchable. &lt;/p&gt;
+&lt;p&gt;The “Call to Action” for technical help and community contributions from Kaggle was another motivation to start this project. &lt;/p&gt;
+&lt;p&gt;CORDBoard is such an experiment that takes in the raw datasets and presents the users with an elegant, simple to use interface.&lt;/p&gt;
+&lt;h1&gt;The Problem&lt;/h1&gt;
+&lt;p&gt;The CORD datasets released by Allen Institute and other partners, are rich in information  nested into complex json structures. These datasets cannot be used as they are, and needed a user interface for users to view, read and search through them.&lt;/p&gt;
+&lt;p&gt;Usually, research papers have two primary properties:
+Information on the topic of research, and
+References to other articles, papers, blogs, books &lt;/p&gt;
+&lt;p&gt;Before getting into the details of the problems, let us review what the datasets are.&lt;/p&gt;
+&lt;h2&gt;Dataset Description&lt;/h2&gt;
+&lt;p&gt;In response to the COVID-19 pandemic, the White House and a coalition of leading research groups have prepared the COVID-19 Open Research Dataset (CORD-19). CORD-19 is a resource of over 57,000 scholarly articles, including over 45,000 with full text, about COVID-19, SARS-CoV-2, and related coronaviruses. This freely available dataset is provided to the global research community to apply recent advances in natural language processing and other AI techniques to generate new insights in support of the ongoing fight against this infectious disease. There is a growing urgency for these approaches because of the rapid acceleration in new coronavirus literature, making it difficult for the medical research community to keep up - Source: Kaggle (&lt;a href=&quot;https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge&quot;&gt;https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge&lt;/a&gt;)&lt;/p&gt;
+&lt;h1&gt;Key Issues&lt;/h1&gt;
+&lt;p&gt;Some of the main issues identified are:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Complex data&lt;/li&gt;
+&lt;li&gt;Presentation of data&lt;/li&gt;
+&lt;li&gt;Search&lt;/li&gt;
+&lt;li&gt;Performance&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Below are detailed explanations of the issues.&lt;/p&gt;
+&lt;h2&gt;1. Complex data&lt;/h2&gt;
+&lt;p&gt;The datasets released by Allen Institute have primarily datasets which are collections of research papers from three key sources:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;CZI&lt;/li&gt;
+&lt;li&gt;PMC&lt;/li&gt;
+&lt;li&gt;BioRxiv/MedRxiv&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Since each research paper contains lots of information on the topic and references the Authors used, the overall data structure becomes complex with multi-levels and nesting.&lt;/p&gt;
+&lt;p&gt;For example, Each Paper has:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;1 Title&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Metadata&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Several Authors&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;With their details like Names, Contact info, Work details etc.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Several abstracts&lt;/li&gt;
+&lt;li&gt;Several Citations&lt;/li&gt;
+&lt;li&gt;Several References to Books&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Manipulating these complex structures to make them presentable is a complex task for programmers. &lt;/p&gt;
+&lt;h2&gt;2. Data is updated regularly&lt;/h2&gt;
+&lt;p&gt;Allen Institute proposed to be updating their dataset periodically, at least once a week. Importing this data into an existing database, overwriting existing and adding new records will be a tedious job. &lt;/p&gt;
+&lt;h2&gt;3. Presentation of data&lt;/h2&gt;
+&lt;p&gt;The primary idea of this project is to make this data viewable and searchable for users. Reading the complex/nested data, parsing them programmatically into programmatic objects and then presenting these in a simple, elegant way for users is a big challenge.&lt;/p&gt;
+&lt;p&gt;Also, the application needs to focus on end-users. Since this is targeted at a global audience, some of them may have little computer knowledge, and this application needs to have a simple to use interface. &lt;/p&gt;
+&lt;h2&gt;4. Search&lt;/h2&gt;
+&lt;p&gt;The more data points per research paper, the more users would want to search. And this multiplies by the number of papers the whole dataset consists. As of this writing (April, 28, 2020) there are about 47,000 papers. &lt;/p&gt;
+&lt;p&gt;In the computing world, 47,000 records is not big/huge, but the primary concern is the circular references each research paper contains. If every search needs to go through all the dataset to g=fetch found papers, it may slow down the application posting requirements for more infrastructure.&lt;/p&gt;
+&lt;h2&gt;5. Performance&lt;/h2&gt;
+&lt;p&gt;The intention for Allen Institute to make their dataset used by the global research community. Although a minimum network with basic internet speeds are required for a website to function. Unfortunately not all researchers at different countries/regions may not have access to high-speed internet. Care needs to be taken to make application load data in an acceptable time without crashing or failing often. &lt;/p&gt;
+&lt;h1&gt;The Solution&lt;/h1&gt;
+&lt;p&gt;The primary intention for this project was to develop an easy to use, simple, elegant solution for researchers across the globe to view and search the dataset. One of the options I chose was to build a website and to make the usage free for all. &lt;/p&gt;
+&lt;p&gt;Why not a mobile app? Although the usage of a mobile has exceeded that of desktop/laptop computers, researchers still prefer using computer desktops/laptops. Some of the reasons A) to be able to view lots of data in a better way on a larger screen that that of smaller mobile screens and B) Research papers have lots of references, opening multiple tabs and moving between them is easier on desktops/laptops. &lt;/p&gt;
+&lt;p&gt;The website being built will also be responsive, which automatically adjusts its display based on the users’ screen size.&lt;/p&gt;
+&lt;h2&gt;Approach&lt;/h2&gt;
+&lt;p&gt;My Approach has been to: Focus on the User Interface and User Experience (UI/UX) while not getting into the details of the structure of raw data in the dataset.&lt;/p&gt;
+&lt;p&gt;My approach was broken down into five parts, each solving a piece of the puzzle.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Part 1: Import the raw dataset as-is into a data store&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Problems addressed:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The dataset is frequently updated at the source, so this way the dataset can be downloaded and imported/overwritten on top of the existing data without much effort&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Part 2: Make data available as a service&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Problems addressed:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Provides a layer of abstraction to backend or consumer applications
+Can be extensible for other applications&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Part 3: Parse the raw/json data into programmable objects at backend&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Problems addressed:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Provides a layer of abstraction to front-end or consumer applications&lt;/li&gt;
+&lt;li&gt;Will be easier for consumption by the front-end&lt;/li&gt;
+&lt;li&gt;Can be extensible to be used by other applications&lt;/li&gt;
+&lt;li&gt;Will help in server side rendering and performing complex operations like Search, Pagination, etc.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Part 4: Read the data objects from backend and manage user interactions in a performant way&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Problems addressed:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Need not get into the details of the data structure. It has been abstracted at backend level.&lt;/li&gt;
+&lt;li&gt;Using a robust front-end framework that can handle presentation of large dataset and user interactions in a performant way without much boilerplate code and make it easier for developers to program without much effort.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Part 5: Handle presentation details of the website in a simple way&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Problems address:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Using a mature design system that has pre-built components. This makes development easier with less boilerplate code for designers and development teams.&lt;/li&gt;
+&lt;li&gt;Build applications faster and scale it efficiently.&lt;/li&gt;
+&lt;li&gt;The UI is responsive and site design looks consistent across all platforms. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Architecture&lt;/h2&gt;
+&lt;p&gt;To address all the problems, and solution approach, the following architecture was developed to build the website.&lt;/p&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/0c459c87960e36235081b260fba11f1e/8ce52/CORD-Architecture-Text.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 37.16216216216216%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAYAAAAIy204AAAACXBIWXMAAAsSAAALEgHS3X78AAAA5ElEQVQoz31RCW7DMAzz/5+ZBM3RNmnj+ooPTlJnbwi6CSAsxTBFMiofB/z9Dne9wtHJvblcEK3FpyqlNNT5d6noHOyyQHcd7DwjGgO/bXC3G8LzKX1FSelP8gqVvCdVq5CyyuSDPAyPB/y6wtPJxIfWSM4jxwgWUXL+6EBVy/bbspkmhH0XQt310H1PhDtSCHLPLl7DIPdMzoIEdC8KzxsOIrPTLA/tvLwXkX2Ogkn4G8+vfmjkDDOOolqdM/ivOEe2L0opIr9uLWde1hSe/1oDbaw2WRWT1N6M089MLjiaTNl/AZZxH/plqWogAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;CORD Architecture Text&quot;
+        title=&quot;CORD Architecture Text&quot;
+        src=&quot;/static/0c459c87960e36235081b260fba11f1e/fcda8/CORD-Architecture-Text.png&quot;
+        srcset=&quot;/static/0c459c87960e36235081b260fba11f1e/12f09/CORD-Architecture-Text.png 148w,
+/static/0c459c87960e36235081b260fba11f1e/e4a3f/CORD-Architecture-Text.png 295w,
+/static/0c459c87960e36235081b260fba11f1e/fcda8/CORD-Architecture-Text.png 590w,
+/static/0c459c87960e36235081b260fba11f1e/8ce52/CORD-Architecture-Text.png 681w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;Overall Architecture&lt;/h2&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/857ac9677932fa33004003df18a518b1/38124/CORD-Architecture.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 54.72972972972974%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAIAAADwazoUAAAACXBIWXMAAAsTAAALEwEAmpwYAAACMklEQVQoz32PzW8SQRjGJ41Jzx78Q4zGg3rQizHxqCf1YOJB/wBSTWwqtFYiTWoaE0MsaQtqDxpjldaPSiyQQoGWtdoFgVp2Z3d29otdusAuCLuLg40no2+evHlm3vzmmRdcf0MdnU2eXkidCafPRtKn5tdPzqeOPUkUFaPf7zuu2/93gROhJPCuDD9YPTz9+cjM2nDg0yH/R3A3mkU6Gdv/h48H42D07ZBvGRCNLwNvdMi3Au4sZXiNjHuO7ZL43/qLdcG7Mp6jmFBu98UOv1REkS/w6TZcyDO1VmeQbNvOnxps4ZCLn47TJd22e6Bt6GZNNiRk6aqpq5amEJma1O/131fDwW+35greWXp0nvY1rHq9Dmsap6qwvo8RogCPhJquN01LVlQk4EbLbFlWFcJexwl/n/Bkzo1tXRzbvDSxdUVvybrGQK5aqZQEjFkuDURRNE3TsgbPYoyJ6Xa7EEKzaUZ3Q+Hc1PPt6cn8VX/+Wt2saVpBlJO8EOfQGsvFAAHa7bbrugfwwW6Qg1az/bI8E8jcfEUHI/R9P0VgTdd3RCWhqqymIR4VB7AgCCRKkiTiGYYhnoWs3XEXK4GR1IUyLIhYnNq8oRi4ru/xwleWFZgq2qtSAxghRBie54lhWZZ0kkx2jpQmPanzceb1Bv9hPHtZMUTybSwlEF7HUhqiGJBlmWSSXi6XaZomJDkiAdlddxU+e0zdfhj3PMqOREr3Gm3D2P8hiBvFUkyUc1jK/QIVKSMMDP2dQQAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;CORD Architecture&quot;
+        title=&quot;CORD Architecture&quot;
+        src=&quot;/static/857ac9677932fa33004003df18a518b1/fcda8/CORD-Architecture.png&quot;
+        srcset=&quot;/static/857ac9677932fa33004003df18a518b1/12f09/CORD-Architecture.png 148w,
+/static/857ac9677932fa33004003df18a518b1/e4a3f/CORD-Architecture.png 295w,
+/static/857ac9677932fa33004003df18a518b1/fcda8/CORD-Architecture.png 590w,
+/static/857ac9677932fa33004003df18a518b1/efc66/CORD-Architecture.png 885w,
+/static/857ac9677932fa33004003df18a518b1/38124/CORD-Architecture.png 953w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;Application Security&lt;/h2&gt;
+&lt;p&gt;The dataset is freely available but unauthorized/improper access to data should be not allowed. &lt;/p&gt;
+&lt;p&gt;CORDBoard website has been built using modern application development adding abstraction at all layers. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;[Abstraction at database level]: Raw/JSON data is stored in MongoDB database.
+a. This data is exposed as a service using MongoDB’s Stitch Services (needs a secure key to access). &lt;/li&gt;
+&lt;li&gt;[Abstraction at backend level]: Java code (intended as backend) reads/consumes the database/stitch service.
+a. This code does not know about where and how the data is stored.
+b. The data read by Java code is parsed, read into java objects and exposed as a service.&lt;/li&gt;
+&lt;li&gt;[Abstraction at Frontend level]: Angular code (intended as front-end) read/consumes the Java services.
+a. This code does not know anything about where and how the data is stored and retrieved. &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;Technology Stack&lt;/h2&gt;
+&lt;p&gt;CORDBoard site has been built using the following technologies/frameworks.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;IBM Carbon Design System [version 10.6]&lt;/li&gt;
+&lt;li&gt;IBM Carbon Angular Component [version 3.17]&lt;/li&gt;
+&lt;li&gt;Angular [version 8.x]&lt;/li&gt;
+&lt;li&gt;Java [version JDK 8]&lt;/li&gt;
+&lt;li&gt;Helidon MP [version 1.4] - web server to run Java application&lt;/li&gt;
+&lt;li&gt;MongoDB Cloud - Atlas and Stitch services&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1&gt;CORDBoard Website Demo&lt;/h1&gt;
+&lt;h2&gt;Home Page&lt;/h2&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/fca81b2ed85b866e1f8ad94fd2538a93/05883/CORD-Page0-Home.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 39.189189189189186%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAIAAAB2/0i6AAAACXBIWXMAABYlAAAWJQFJUiTwAAAAp0lEQVQY06XN7Q6CIBQGYO68jWkFU3HR/aBL0GuxSF3hZ0Jgrd82n73jnMMOA1B6PiJE4vhEaUSIDSHxL0EYhQhhD+Ig3B/s4sHHvocxhJCgHWCMJQ5L04R/ZYvLkiyzIxeuusYeXAieFzkXBWia+um0qu21MdM0aW3rKqC6S1mrsupL+bjepKWUGsdRrwC6zv7ZDcNgzOfGrAdm56X1bP4HzAabHr8BNBqy2O6kb4QAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;CORD Page0 Home&quot;
+        title=&quot;CORD Page0 Home&quot;
+        src=&quot;/static/fca81b2ed85b866e1f8ad94fd2538a93/fcda8/CORD-Page0-Home.png&quot;
+        srcset=&quot;/static/fca81b2ed85b866e1f8ad94fd2538a93/12f09/CORD-Page0-Home.png 148w,
+/static/fca81b2ed85b866e1f8ad94fd2538a93/e4a3f/CORD-Page0-Home.png 295w,
+/static/fca81b2ed85b866e1f8ad94fd2538a93/fcda8/CORD-Page0-Home.png 590w,
+/static/fca81b2ed85b866e1f8ad94fd2538a93/efc66/CORD-Page0-Home.png 885w,
+/static/fca81b2ed85b866e1f8ad94fd2538a93/c83ae/CORD-Page0-Home.png 1180w,
+/static/fca81b2ed85b866e1f8ad94fd2538a93/05883/CORD-Page0-Home.png 2808w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;Research Papers Home Page&lt;/h2&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/ffea40bfd9e2074afacc41d1beba4bf4/ae3b6/CORD-Page1.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 60.810810810810814%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAIAAADtbgqsAAAACXBIWXMAABYlAAAWJQFJUiTwAAABsUlEQVQoz5WQb2+bMBDG+ebTpmZNYZm6V/lES7ZJTZNUVZtRKISAC8U2Pv+BJpDt7KXStheTdnp4/PPZ5s72ptPpZPLx8vKT7wcfJhM/CP6QH4wv/OB85I/OcH30/ty/GL8dn43GwejdG282m83n88Vice1itVz+rdVqabU+MdJyfXOzxs87HA5d1+33+2EYjsfjj/8Jr21bKaE1RmtlUEa3/5TdoyV63/eeNh1rFKi2AY0u9YtQVqBfwEHza6pOeQ4tbXBnh516aak/3/JvG/HlTlw9wDqWSSESAukTbIl4LFCQEkiITSZEPhLATFbCMPQe5SLJSE6qLC9JSauaP9espowybp3yuqanDGWiQVEnZtuumNqkPM5FnDfftyzKmk3KEMKMh1uOnj6ppNRZpbFHLpRWSkollbuzMUaCwDd7jd8QQAiXsTnpVqRwgGgPp6X5eg9XobyOIM7hYSeiHMIdWM8gLvCSKiYKPXFCqCiWlvZwI1ReMvLMy5pzzk5irLEzhrVtm9iokm60oC27yoSa21TeZ2qTqShXUWH/Hb96lEsUPm/swLEMd7KoYOgPPwEJFYJsgdHHuwAAAABJRU5ErkJggg==&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;CORD Page1&quot;
+        title=&quot;CORD Page1&quot;
+        src=&quot;/static/ffea40bfd9e2074afacc41d1beba4bf4/fcda8/CORD-Page1.png&quot;
+        srcset=&quot;/static/ffea40bfd9e2074afacc41d1beba4bf4/12f09/CORD-Page1.png 148w,
+/static/ffea40bfd9e2074afacc41d1beba4bf4/e4a3f/CORD-Page1.png 295w,
+/static/ffea40bfd9e2074afacc41d1beba4bf4/fcda8/CORD-Page1.png 590w,
+/static/ffea40bfd9e2074afacc41d1beba4bf4/efc66/CORD-Page1.png 885w,
+/static/ffea40bfd9e2074afacc41d1beba4bf4/c83ae/CORD-Page1.png 1180w,
+/static/ffea40bfd9e2074afacc41d1beba4bf4/ae3b6/CORD-Page1.png 2836w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;Paper Detail Page&lt;/h2&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/d407fbc06fa1c4cb8a5fee898a97a8f1/34e83/CORD-Page2.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 61.48648648648649%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAIAAADtbgqsAAAACXBIWXMAABYlAAAWJQFJUiTwAAABRElEQVQoz52S226CQBCG98l7ZTgtq720rwNdeuMNsUalFGhi5GBNBIqH4ul3txDtRZv4Bf7MzM7OMLuQfv+JUlPTdMOgmq4riopHVTWTMdbt4qUm61GDaQrrPeo6pVTvIN0w1c4DGQwGtm0/CxzHgXKBZVmcI8Kxatk251iCciS8cMd13eHwlWw2m6Io9vv9N6hradR1fTgcTv9BkiSJogjZcI7Ho1TJH9tkAonjeD6fn+6CLBaLLMvu3LxcLsMwxNjr9bqqqq9bKgGMsizbiLRxKJeZR6PRmyAIguiWD8GvCNJms9llM3qmaZrnedGAqlCUb92yQTaHsd1ufz4b9TD5ZwNsBGUEulqt2rr5FbgggrbT6dT3fajnedDxeOwJYE8mE+8KXyAH3O12BOXh48ygCLX6LggEoQDT4lLl1eKk8DudAb+2gstCQfGwAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;CORD Page2&quot;
+        title=&quot;CORD Page2&quot;
+        src=&quot;/static/d407fbc06fa1c4cb8a5fee898a97a8f1/fcda8/CORD-Page2.png&quot;
+        srcset=&quot;/static/d407fbc06fa1c4cb8a5fee898a97a8f1/12f09/CORD-Page2.png 148w,
+/static/d407fbc06fa1c4cb8a5fee898a97a8f1/e4a3f/CORD-Page2.png 295w,
+/static/d407fbc06fa1c4cb8a5fee898a97a8f1/fcda8/CORD-Page2.png 590w,
+/static/d407fbc06fa1c4cb8a5fee898a97a8f1/efc66/CORD-Page2.png 885w,
+/static/d407fbc06fa1c4cb8a5fee898a97a8f1/c83ae/CORD-Page2.png 1180w,
+/static/d407fbc06fa1c4cb8a5fee898a97a8f1/34e83/CORD-Page2.png 2852w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h2&gt;Search and Pagination&lt;/h2&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto; max-width: 590px; &quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/3c56084f3683eebf5a35c1812d23a0c3/1f854/CORD-Page3-Search.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 59.45945945945946%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAIAAADtbgqsAAAACXBIWXMAABYlAAAWJQFJUiTwAAABjElEQVQoz32RC2/aMBSF+enTVDWFBKbud62jareGxKQlD7CdxHb8Ct6gbNcB1A5tu/p0dXyt42PLo9vbz0FwMx5PprPZdPYpiqYXhGEUTsLo+gpWwXgyGd8EYXAdRlcfP4zSJPl69+V+Pn+Kn5JFnKbJ30hThEAg5DWoJUrRMhsd3E5iZqXtd6/u5/7w67IOAxeT10GM9sbJNTUNN1KZTvV9b/vtv+mVNoDt3WCuuyLj+ZLniBfPoiQ94Y4wR4WrhcPMYe41hSGHyRY6ZtuTeSf0Q0Lvs3aOmodnlhbdmnBMOakFAGJDWIVZRTiwpsILzOGWR7Mpq7YkosSwAcmywF2+6U6CyHWttJJaq3dIawfzvjMEM9x0xCNwzd865bSVrDP6z1JKWWtP5g0WZa0LokoKaADSfG9sVZtN8x+zMBS3pPWxnvr42lMmEwb6RYEfPuWcTOSQAIG6ohrEWSu4TsP8m99X1/nzvPnH1j1+T+ePybc4i9OXBVrFaLXw5Eeyl2J1rjzPi8IvwQ/m3zhRg2ldJdWhAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;CORD Page3 Search&quot;
+        title=&quot;CORD Page3 Search&quot;
+        src=&quot;/static/3c56084f3683eebf5a35c1812d23a0c3/fcda8/CORD-Page3-Search.png&quot;
+        srcset=&quot;/static/3c56084f3683eebf5a35c1812d23a0c3/12f09/CORD-Page3-Search.png 148w,
+/static/3c56084f3683eebf5a35c1812d23a0c3/e4a3f/CORD-Page3-Search.png 295w,
+/static/3c56084f3683eebf5a35c1812d23a0c3/fcda8/CORD-Page3-Search.png 590w,
+/static/3c56084f3683eebf5a35c1812d23a0c3/efc66/CORD-Page3-Search.png 885w,
+/static/3c56084f3683eebf5a35c1812d23a0c3/c83ae/CORD-Page3-Search.png 1180w,
+/static/3c56084f3683eebf5a35c1812d23a0c3/1f854/CORD-Page3-Search.png 3032w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+        style=&quot;width:100%;height:100%;margin:0;vertical-align:middle;position:absolute;top:0;left:0;&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;h1&gt;What’s Next?&lt;/h1&gt;
+&lt;p&gt;While this is just the beginning, there is so much more to do. And when the entire world’s research community comes together to solve a unique problem common to all of them, it will need teams of professionals from several fields to join hands. This project may be providing a small/miniature solution to a major global pandemic, but as an old saying “A journey of a 1000 miles starts with a single step”, yes we have to start somewhere and not give up.&lt;/p&gt;
+&lt;p&gt;As the global research community does more work, we can expect to see more (and maybe an exponential growth on the release of) related research. With more data, there will be a need for more sophisticated software applications. &lt;/p&gt;
+&lt;p&gt;I am also continuing to work on the site to add more features and make it more performant. &lt;/p&gt;
+&lt;p&gt;There is so much more to do.. So much. And as Robert Frost says “Miles to go before I sleep!”.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1&gt;References&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;Kaggle COVID-19 Open Research Dataset Challenge (CORD-19)  &lt;a href=&quot;https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge&quot;&gt;https://www.kaggle.com/allen-institute-for-ai/CORD-19-research-challenge&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Semantic Scholar CORD-19 &lt;a href=&quot;https://www.semanticscholar.org/cord19&quot;&gt;https://www.semanticscholar.org/cord19&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;IBM Carbon Design System  &lt;a href=&quot;https://www.carbondesignsystem.com/&quot;&gt;https://www.carbondesignsystem.com/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Angular Framework  &lt;a href=&quot;https://angular.io/&quot;&gt;https://angular.io/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Java Programming Language &lt;a href=&quot;https://www.oracle.com/java/&quot;&gt;https://www.oracle.com/java/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Helidon &lt;a href=&quot;https://helidon.io/#/&quot;&gt;https://helidon.io/#/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;MongoDB Atlas &lt;a href=&quot;https://www.mongodb.com/cloud/atlas&quot;&gt;https://www.mongodb.com/cloud/atlas&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;MongoDB Stitch &lt;a href=&quot;https://www.mongodb.com/cloud/stitch&quot;&gt;https://www.mongodb.com/cloud/stitch&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h1&gt;About Author&lt;/h1&gt;
+&lt;p&gt;Suren Konathala is a passionate, technology specialist on a mission to simplify technology adoption for organizations. For over two decades he has been (and still is) a developer, architect, consultant, manager and loves to Write and Talk about technology. He holds a Masters degree in Computer Science, studied at Carnegie Mellon and Stanford Universities. He worked in the technology industry at several levels including startups to fortune 100 companies and this experience has helped him learn about technology, projects, technology, people, teams and continues to learn. &lt;/p&gt;
+&lt;p&gt;He has a strong inclination towards advocating for a more inclusive and an open-source / community based technology innovation and development. He is a constant learner and helps teaching, coaching, mentoring individuals and businesses.&lt;/p&gt;
+&lt;p&gt;He can be reached on Twitter at &lt;a href=&quot;https://twitter.com/surenkonathala&quot;&gt;@surenkonathala&lt;/a&gt; or &lt;a href=&quot;https://www.linkedin.com/in/ksurendra&quot;&gt;LinkedIn&lt;/a&gt;.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Helping Helpers]]></title><description><![CDATA[Why Helping helpers is more effective than trying to help an individual in-need.  Why this foundation?
+We believe this strongly. Everyday we…]]></description><link>https://helpinghelp.foundation/helping-helpers/</link><guid isPermaLink="false">https://helpinghelp.foundation/helping-helpers/</guid><pubDate>Sun, 10 May 2020 00:00:00 GMT</pubDate><content:encoded>&lt;p&gt;Why Helping helpers is more effective than trying to help an individual in-need. &lt;/p&gt;
+&lt;p&gt;Why this foundation?
+We believe this strongly. Everyday we come across many random acts of kindness. Some are so small that we forget and some are significant. But small or big, people around try to help each other in one way or other. This really inspires and motivates us.&lt;/p&gt;
+&lt;p&gt;There are some individuals who try to help others even they do not have a lot of fame, support, or an organization.. they just do it for the sake of humanity and to feel content. They do not expect donations, popularity in media and are so humble in what they do.&lt;/p&gt;
+&lt;p&gt;We wanted to HELP these self-motivated individuals in a way we can. Give them some coverage, let other people know that to HELP others, all we need is a HEART to HELP!&lt;/p&gt;
+&lt;p&gt;What we do for a living?
+We are software developers; Have our day jobs; Live modestly in Texas, USA; Always an eye for those inspiring individuals.. we call them OUR HEROES!!!&lt;/p&gt;</content:encoded></item></channel></rss>
