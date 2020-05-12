@@ -79,6 +79,6 @@
     "develop": "gatsby develop",
     "clean": "gatsby clean",
     "serve": "gatsby serve",
-    "deploy": "gatsby build && gh-pages -d public -b gh-pages"
+    "deploy": "gatsby build && cp CNAME public && gh-pages -d public -b gh-pages" 
   }
 }
