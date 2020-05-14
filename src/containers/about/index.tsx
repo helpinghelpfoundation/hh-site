@@ -77,12 +77,17 @@ const About: React.FunctionComponent<AboutProps> = (props) => {
       </AboutImage>
       
       <AboutDetails>
-        <h2>Boring details</h2>
+        <h2>Boring details</h2>       
         <p>
           We are a small team, to be precise, just 2. Everything has to start somewhere by someone. We are doing what we can and maybe inspire some more.
-          <br />
-          Also we are a 501(c)(3) non-profit organization registered in Texas, USA. You may look us on <a href="https://apps.irs.gov/app/eos/" target="_blank">IRS site</a>.
         </p>
+        <h3>What we do?</h3>
+          <p>1. Technical support</p>
+          <p>2. Fundraisng support</p>
+          <p>3. Marketing help</p>
+          <p>4. Financial Research & Training</p>
+        <h3>Legal</h3>
+          <p>We are officially registered in the State of Texas, USA. Also a valid 501(c)(3) non-profit organization. Details on <a href="https://apps.irs.gov/app/eos/" target="_blank">IRS site</a>.</p>
         <h2>Interested to write for us? Or join us?</h2>        
         <p>
         We are always looking for inspiring stories. Please send us.. let's inspire more!!
